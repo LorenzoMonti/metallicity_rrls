@@ -17,4 +17,4 @@ for num, regressor_name in enumerate(regressors):
     regressor = create_regressor(regressor_name, X.shape[1:], '.', 1)
     print(regressor)
     visualkeras.layered_view(regressor.get_model(), to_file='output/model' + regressor_name + '.png', 
-                            type_ignore=[visualkeras.SpacingDummyLayer], legend=True, font=font)
+                            type_ignore=[visualkeras.SpacingDummyLayer], legend=True, font=font, background_fill=None)
