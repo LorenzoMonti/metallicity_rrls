@@ -57,6 +57,7 @@ In the root folder you can find some support scripts such as:
 * `pre-processing.py` necessary for the pre-processing of the photonometric light curves.
 * `plot_all_lightcurves.py` plot of the photonometric dataset of light curves (phase/magnitude).
 * `evaluation_models.py` uses weights from the towed model to evaluate light curves on an unknown test dataset.
+* `draw_models.py` draw all the implemented models (founded in models/ folder).
 
 ## Acknowledgement
 
