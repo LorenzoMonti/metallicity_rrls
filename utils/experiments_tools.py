@@ -229,7 +229,7 @@ def get_model_signature(weights, params, lr, batch_size):
     return "w" + str(weights) + "__" + '_'.join(map(str, params)) + "_lr" + str(lr) + "_Nb" + str(batch_size)
 
 def get_folds(x, yi):
-    splitter = RepeatedStratifiedKFold(n_splits=10, n_repeats=1, random_state=42)
+    splitter = RepeatedStratifiedKFold(n_splits=5, n_repeats=1, random_state=42)
     splitter.random_state = 42
     return list(splitter.split(x, yi, groups=None))
 

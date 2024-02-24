@@ -83,11 +83,6 @@ class GRURegressor(DLRegressor):
 
         output_layer = tf.keras.layers.Dense(1, activation='linear')(gru_layer3)
 
-        model = tf.keras.models.Model(inputs=input_layer, outputs=output_layer)
-
-        model.compile(loss=self.loss,
-                      optimizer=tf.keras.optimizers.Adam(learning_rate=0.01, beta_1=0.9, beta_2=0.999, epsilon=1e-07, amsgrad=False),
-                      metrics=self.metrics,
-                      weighted_metrics=[])
+        model = tf.keras.models.Model(inputs=input_layer, outputs=output_layer,  name='gru')
 
         return model

@@ -89,10 +89,6 @@ class ConvGRURegressor(DLRegressor):
 
         output_layer = tf.keras.layers.Dense(1, activation='linear')(gru_layer2)
 
-        model = tf.keras.models.Model(inputs=input_layer, outputs=output_layer)
-
-        model.compile(loss=self.loss,
-                      optimizer=tf.keras.optimizers.Adam(),
-                      metrics=self.metrics)
+        model = tf.keras.models.Model(inputs=input_layer, outputs=output_layer,  name='convgru')
 
         return model

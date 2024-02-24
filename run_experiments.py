@@ -26,8 +26,9 @@ if __name__ == '__main__':
         # period, X, magnitudes and phases
         periods_input = input_dataset[period].to_numpy()
         X, mags, phases = read_time_series(ids_dev, data_path, max_rrl_point, periods=periods_input, max_phase=1.0)
-        # TODO plot mags and phases
-        
+        # plot mags and phases
+        plot_all_lc(phases['g'], mags['g'], figformat='png', fname="./output/" + "_all_lc")
+
         # y, y_error and y indexes
         y = input_dataset[metallicity].to_numpy()
         y_error = input_dataset[metallicity_error].to_numpy()
@@ -59,7 +60,7 @@ if __name__ == '__main__':
                     
                     cv_train_out, cv_val_out, model_weights, scalers, histories = fitting_cv(
                         regressor, folds, (X,), y, compile_kwargs=compile_kwargs, sample_weight_fit=weights_dev, 
-                        sample_weight_eval=weights_var_dev,ids=ids_dev, n_epochs=2, batch_size=batch_size,
+                        sample_weight_eval=weights_var_dev,ids=ids_dev, n_epochs=n_epochs, batch_size=batch_size,
                         callbacks=callbacks, metrics=(r2_score, roots_mean_squared_error), log_prefix=run_tag, 
                         rootdir=output_directory, filename_val="./val" + str(regressor) + str(hparam_grid[num]),
                         filename_train="./train" + str(regressor) + str(hparam_grid[num]))

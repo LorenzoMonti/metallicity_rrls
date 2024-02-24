@@ -243,12 +243,10 @@ def plot_predictions(y_train_true, y_train_pred, y_val_true=None, y_val_pred=Non
     plt.savefig(os.path.join(rootdir, 'pred_true_hist_' + suffix + '.' + figformat), format=figformat)
     plt.close(fig)
 
-def plot_all_lc(phases, sequences, nmags=100, shift=0, fname=None, indx_highlight=None, figformat="png", nn_type='cnn'):
+def plot_all_lc(phases, sequences, fname=None, indx_highlight=None, figformat="png"):
     """
     Plot all input time series as phase diagrams.
     """
-    n_roll = int(np.round(shift * nmags))
-
     try:
         n_samples = sequences.shape[0]
     except:
@@ -262,27 +260,20 @@ def plot_all_lc(phases, sequences, nmags=100, shift=0, fname=None, indx_highligh
     fig = plt.figure(figsize=(5, 4))
     fig.subplots_adjust(bottom=0.13, top=0.94, hspace=0.3, left=0.15, right=0.98, wspace=0)
     for ii in range(n_samples):
-        if nn_type == "cnn":
-            plt.plot(phases, np.roll(sequences[ii, :], n_roll), ls='-', color='grey', lw=0.3, alpha=0.3)
-        elif nn_type == "rnn":
-            ph = phases[ii]
-            seq = sequences[ii]
-            mask = (ph <= 1)
-            seq = seq[mask]
-            ph = ph[mask]
-            # plt.plot(phases[ii], sequences[ii], ',', color='grey', alpha=0.5)
-            plt.plot(ph, seq, ',', color='grey', alpha=0.5)
+        ph = phases[ii]
+        seq = sequences[ii]
+        mask = (ph <= 1)
+        seq = seq[mask]
+        ph = ph[mask]
+        # plt.plot(phases[ii], sequences[ii], ',', color='grey', alpha=0.5)
+        plt.plot(ph, seq, ',', color='grey', alpha=0.5)
     if indx_highlight is not None:
-        if nn_type == "cnn":
-            plt.plot(phases, np.roll(sequences[indx_highlight, :], n_roll), 'ko')
-        elif nn_type == "rnn":
-            # plt.plot(phases[indx_highlight], sequences[indx_highlight], 'ko')
-            ph = phases[indx_highlight]
-            seq = sequences[indx_highlight]
-            mask = (ph <= 1)
-            seq = seq[mask]
-            ph = ph[mask]
-            plt.plot(ph, seq, 'ko')
+        ph = phases[indx_highlight]
+        seq = sequences[indx_highlight]
+        mask = (ph <= 1)
+        seq = seq[mask]
+        ph = ph[mask]
+        plt.plot(ph, seq, 'ko')
     plt.xlabel('phase')
     plt.ylabel('mag')
     # plt.ylim(-1.1, 0.8)

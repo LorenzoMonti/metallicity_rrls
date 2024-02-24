@@ -7,10 +7,10 @@ import pickle
 import matplotlib.pyplot as plt
 
 model_type = "DL" # ML or DL
-path = "output/regression_standard/"
-model = "convgru/"
+path = "output/regression_dl/"
+model = "bigru/"
 ml_filename = "rrls/itr_1/finalized_model.sav"
-dl_filename = "rrls/itr_1/best_model.h5"
+dl_filename = "rrls/itr_1/weightsw0.5__16_16_l1_5e-06_5e-06_0_0_0.1_0.1_lr0.01_Nb256_0.h5"
 catalog = "data/rrls/valutation_dataset/valutation_catalog/"
 testset_distribution = "rrls/itr_1/testset-distribution.png"
 results = "rrls/itr_1/val_predictions.png"

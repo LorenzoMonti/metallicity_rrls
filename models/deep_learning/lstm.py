@@ -14,7 +14,6 @@ class LSTMRegressor(DLRegressor):
             self,
             output_directory,
             input_shape,
-            is_spline,
             verbose=False,
             epochs=200,
             batch_size=256,
@@ -38,7 +37,6 @@ class LSTMRegressor(DLRegressor):
         super().__init__(
             output_directory=output_directory,
             input_shape=input_shape,
-            is_spline=is_spline,
             verbose=verbose,
             epochs=epochs,
             batch_size=batch_size,
@@ -86,11 +84,6 @@ class LSTMRegressor(DLRegressor):
 
         output_layer = tf.keras.layers.Dense(1, activation='linear')(lstm_layer3)
 
-        model = tf.keras.models.Model(inputs=input_layer, outputs=output_layer)
-
-        model.compile(loss=self.loss,
-                      optimizer=tf.keras.optimizers.Adam(learning_rate=0.01, beta_1=0.9, beta_2=0.999, epsilon=1e-07, amsgrad=False),
-                      metrics=self.metrics,
-                      weighted_metrics=[])
+        model = tf.keras.models.Model(inputs=input_layer, outputs=output_layer,  name='lstm')
 
         return model
