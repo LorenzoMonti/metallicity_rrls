@@ -15,14 +15,14 @@ module = "RegressionExperiment"
 data_path = "data/rrls/catalog/"
 rrl_path = "data/rrls/raw_datasets/raw_dataset_6696/"
 problems = ["rrls"]       
-regressors = ["bilstm", "svr"]
-iterations = [1]
+regressors = ["bigru"]
+iterations = [3]
 used_ids = "ids.txt"
 results = "train_predictions.png"
 
 # Pre-processing and cross validation
-is_spline = False # if spline method has been applied or not
-dl = [True, False] # if deep learning models are used
+is_spline = True # if spline method has been applied or not
+dl = [True] # if deep learning models are used
 dens_weight = 0.5 # alpha parameter in density weight
 spline_points = et.find_max_points(data_path)
 rrls_number = len(os.listdir(data_path))
@@ -36,7 +36,7 @@ metallicity_error = "FeH_error"
 
 # Model parameters
 dl_array = np.array([16, 16, 'l1', 5e-6, 5e-6, 0, 0, 0.1, 0.1])
-hparam_grid = [dl_array, None]
+hparam_grid = [dl_array]
 learning_rate=0.01
 beta_1=0.9
 beta_2=0.999
