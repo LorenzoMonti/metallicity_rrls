@@ -119,7 +119,7 @@ def write_csv(data_path, title, text_row):
 def read_csv_dataset(data_path, points):
     
     df = pd.read_csv(data_path + "rrls.csv")# read from csv
-    df.insert(2, "totamp_g", [1.3] * points, True) # add a column
+    #df.insert(2, "totamp_g", [1.3] * points, True) # add a column
     df.drop(["epoch_g"], axis=1) # remove a column
     
     return df
@@ -163,14 +163,14 @@ def plot_sample_weights(y, by_density, weights_dens, ykde, weights):
     sort_indx = np.argsort(y)
 
     fig, ax1 = plt.subplots(1, 1, figsize=(5, 4))
-    fig.subplots_adjust(bottom=0.13, top=0.95, hspace=0, left=0.1, right=0.85, wspace=0)
+    fig.subplots_adjust(bottom=0.13, top=0.95, hspace=0, left=0.15, right=0.85, wspace=0)
     ax2 = ax1.twinx()
     if by_density:
         ax2.plot(y, weights_dens / weights_dens.max(), 'k.', alpha=1, label="density weights")
-        ax1.plot(y[sort_indx], ykde[sort_indx], 'b-', label="KDE")
-    ax2.plot(y, weights, 'r,', alpha=1, label="weights")
-    ax1.hist(y, facecolor='red', alpha=0.4, bins='sqrt', density=True, label="hist.")
-    ax1.set_xlabel("$[Fe/H]_I$")
+        ax1.plot(y[sort_indx], ykde[sort_indx], 'g-', label="KDE")
+    ax2.plot(y, weights, 'b,', alpha=1, label="weights")
+    ax1.hist(y, facecolor='#3F3FFF', alpha=0.4, bins='sqrt', density=True, label="hist.")
+    ax1.set_xlabel("$[Fe/H]$")
     ax1.set_ylabel('norm. density')
     ax2.set_ylabel('weights')
     ax1.tick_params(direction='in')

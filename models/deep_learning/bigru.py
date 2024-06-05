@@ -78,7 +78,7 @@ class BiGRURegressor(DLRegressor):
         x = tf.keras.layers.Dropout(rate=float(0.2))(x)
         
         x = tf.keras.layers.Bidirectional(tf.keras.layers.GRU(16, 
-                                                              return_sequences=True, 
+                                                              return_sequences=False, 
                                                               kernel_regularizer=kernel_regularizer2,
                                                               recurrent_regularizer=recurrent_regularizer2))(x)
         

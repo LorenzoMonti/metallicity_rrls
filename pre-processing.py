@@ -98,28 +98,22 @@ def create_aug_catalog(path, source, augm_data):
         for data in data_list:
             f.write(f"'', '', {data[0]}, {data[1]}\n")
 
-def create_catalog(rrls, path, source, data):
+def create_catalog(path, source, data, isMean):
     """
     Create a dataset (catalog) using phase  
-    and magnitude data and adding metallicity 
-    measure (FeH) from rrls file as class.
+    and magnitude data from rrls file as class.
     """
     
     phase, magn, magnMean = data[0], data[1], data[2]
-    listPhase, listMagn = (list(t) for t in zip(*sorted(zip(phase, (magn - magnMean)))))
-
-    # retrieve metallicity
-    rrl = pd.read_csv(rrls)
-    temp_dataset = rrl.loc[:,["source_id","FeH", "FeH_error"]]
-    metallicity = temp_dataset.loc[temp_dataset['source_id'] == source, 'FeH'].iloc[0]
-    metallicity_error = temp_dataset.loc[temp_dataset['source_id'] == source, 'FeH_error'].iloc[0]
+    if isMean: listPhase, listMagn = (list(t) for t in zip(*sorted(zip(phase, (magn - magnMean)))))
+    else: listPhase, listMagn = (list(t) for t in zip(*sorted(zip(phase, magn))))
 
     # write file
     with open(path + str(source) + ".csv", "w") as f:
-        f.write("phase,magnitude,FeH, FeH_e\n")
+        f.write("n,time,phase,magnitude\n")
         data_list = list(zip(listPhase, listMagn))
         for data in data_list:
-            f.write(f"{data[0]}, {data[1]}, {metallicity}, {metallicity_error}\n")
+            f.write(f"'', '', {data[0]}, {data[1]}\n")
 
 def find_max_points(data_path):
     max_points = 0
@@ -130,14 +124,14 @@ def find_max_points(data_path):
 
 if __name__ == "__main__":
 
-    dir_path = "data/rrls/raw_datasets/raw_dataset_6696/light_curves/"
-    dir_rrls = "data/rrls/raw_datasets/raw_dataset_6696/rrls.csv"
+    dir_path = "data/rrls/raw_datasets/raw_testset_all_c/light_curves/"
+    dir_rrls = "data/rrls/raw_datasets/raw_testset_all_c/rrls.csv"
     save_path = "data/rrls/plotted_dataset/"
     catalog_path = "data/rrls/catalog/"
     spline_points = find_max_points(dir_path)
     
     # dataset generation variables
-    isMean = False # if you want to standardize magnitude or not
+    isMean = True # if you want to standardize magnitude or not
     is_plot = False # if you want to plot source splined dataset 
     is_spline = True # if you want to generate splined dataset or not
     full_catalog = False # catalog splined with phase, mean(mag), feh and feh_error (Full Catalog) 
@@ -159,7 +153,7 @@ if __name__ == "__main__":
                 if full_catalog: create_aug_full_catolog(dir_rrls, catalog_path, source, augm_data)
                 else: create_aug_catalog(catalog_path, source, augm_data)
             else:
-                create_catalog(dir_rrls, catalog_path, source, [source_lc.loc[:, "fase1"], source_lc.loc[:, "mag"], mag_mean])
+                create_catalog(catalog_path, source, [source_lc.loc[:, "fase1"], source_lc.loc[:, "mag"], mag_mean], isMean=isMean)
         except:
             print("file not found in dataset")
             continue

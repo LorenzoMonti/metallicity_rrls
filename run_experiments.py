@@ -27,7 +27,7 @@ if __name__ == '__main__':
         periods_input = input_dataset[period].to_numpy()
         X, mags, phases = read_time_series(ids_dev, data_path, max_rrl_point, periods=periods_input, max_phase=1.0)
         # plot mags and phases
-        plot_all_lc(phases['g'], mags['g'], figformat='png', fname="./output/" + "_all_lc")
+        #plot_all_lc(phases['g'], mags['g'], figformat='png', fname="./output/" + "_all_lc")
 
         # y, y_error and y indexes
         y = input_dataset[metallicity].to_numpy()
