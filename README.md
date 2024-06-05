@@ -1,4 +1,4 @@
-# rrls_metallicity
+# Metallicity RRLs
 
 Machine learning and deep learning models to estimate metallicity from light curves.
 
