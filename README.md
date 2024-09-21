@@ -66,3 +66,21 @@ Some of the models used are based on [TSER project](https://github.com/ChangWeiT
 ## License
 
 This project has an MIT-style license, as found in the [LICENSE](LICENSE) file.
+
+## Citation
+
+If you use this project for your research, a citation in your manuscript would be gladly appreciated.
+
+[**[Leveraging Deep Learning for Time-Series Extrinsic Regression in Predicting the Photometric Metallicity of Fundamental-Mode RR Lyrae Stars]**](https://www.mdpi.com/1424-8220/24/16/5203)
+```bibtex
+@article{monti2024leveraging,
+  title={Leveraging Deep Learning for Time-Series Extrinsic Regression in Predicting the Photometric Metallicity of Fundamental-Mode RR Lyrae Stars},
+  author={Monti, Lorenzo and Muraveva, Tatiana and Clementini, Gisella and Garofalo, Alessia},
+  journal={Sensors},
+  volume={24},
+  number={16},
+  pages={5203},
+  year={2024},
+  publisher={MDPI}
+}
+```
