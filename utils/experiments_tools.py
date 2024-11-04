@@ -176,7 +176,7 @@ def plot_sample_weights(y, by_density, weights_dens, ykde, weights):
     ax1.tick_params(direction='in')
     ax2.tick_params(direction='in')
     
-    plt.savefig('./output/weights.png', format='png')
+    plt.savefig('./output/weights.png', format='png', dpi=300)
     plt.close(fig)
 
 def y_indexes(y, n_dev):

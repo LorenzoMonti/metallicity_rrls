@@ -3,6 +3,7 @@ import tensorflow as tf
 from models.deep_learning.deep_learning_models import DLRegressor
 from utils.constants import is_spline
 
+
 class GRURegressor(DLRegressor):
     """
     This is a class implementing the GRU model for time series regression.

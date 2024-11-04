@@ -1,14 +1,31 @@
 from time import time
 import numpy as np
 import tensorflow as tf
+from ray import tune
+from ray.tune.search.hyperopt import HyperOptSearch
+from tensorflow.keras.metrics import RootMeanSquaredError
+from tensorflow.keras.regularizers import l1, l2
 
 name = "RegressorTools"
 
 classical_ml_models = ["xgboost", "svr", "random_forest"]
-deep_learning_models = ["fcn", "resnet", "inception", "convlstm", "lstm", "bilstm", "gru", "bigru", "convgru"]
+deep_learning_models = ["fcn", "resnet", "inception", "convlstm", "lstm", "bilstm", "gru", "bigru", "convgru", "transformer"]
 tsc_models = ["rocket"]
 linear_models = ["lr", "ridge"]
 all_models = classical_ml_models + deep_learning_models + linear_models
+
+# search space optimition values
+search_space = {
+    "learning_rate": tune.loguniform(1e-5, 1e-2),  # Learning rate
+    "batch_size": tune.choice([16, 32, 64, 128]),  # Batch size
+    "dropout": tune.uniform(0.0, 0.5),  # Dropout rate
+    "num_layers": tune.choice([1, 2, 3, 4, 5]),  # Number of GRU layers
+    "optimizer": tune.choice(["adam", "rmsprop", "sgd"]),  # Optimizer type
+    "epochs": tune.randint(10, 30000),  # Number of epochs
+    "activation": tune.choice(["tanh", "relu"]),  # Activation function
+    "kernel_regularizer": tune.choice([None, l1(2e-4), l2(2e-4), l1(2e-5), l2(2e-5), l1(2e-6), l2(2e-6)]),  # L1 or L2 for kernel regularization
+    "recurrent_regularizer": tune.choice([None, l1(2e-4), l2(2e-4), l1(2e-5), l2(2e-5), l1(2e-6), l2(2e-6)]),  # L1 or L2 for recurrent regularization
+}
 
 ############################################
 #               Regressor                  #
@@ -43,6 +60,20 @@ def fit_regressor(output_directory, regressor_name, X_train, y_train, density_we
     print("[{}] Regressor fitted, took {}s".format(name, elapsed_time))
     return regressor
 
+def hyperparam_opt(regressor):
+
+    tuner = tune.Tuner(
+        regressor,
+        tune_config=tune.TuneConfig(
+            metric=[RootMeanSquaredError()],
+            mode="min",
+            search_alg=HyperOptSearch(),
+        ),
+        param_space=search_space,
+    )
+    results = tuner.fit()
+    return results
+
 def create_regressor(regressor_name, input_shape, output_directory, verbose=1, itr=1):
     """
     This is a function to create the regression model
@@ -54,7 +85,7 @@ def create_regressor(regressor_name, input_shape, output_directory, verbose=1, i
     :return:
     """
     print("[{}] Creating regressor".format(name))
-    # SOTA TSC deep learning
+    # TSER deep learning
     if regressor_name == "resnet":
         from models.deep_learning import resnet
         return resnet.ResNetRegressor(output_directory, input_shape, verbose)
@@ -82,6 +113,9 @@ def create_regressor(regressor_name, input_shape, output_directory, verbose=1, i
     if regressor_name == "convgru":
         from models.deep_learning import convgru
         return convgru.ConvGRURegressor(output_directory, input_shape, verbose)
+    if regressor_name == "transformer":
+        from models.deep_learning import transformer
+        return transformer.TransformerRegressor(output_directory, input_shape, verbose)
 
     # classical ML models
     if regressor_name == "xgboost":

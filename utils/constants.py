@@ -9,14 +9,13 @@ from tensorflow.keras.metrics import RootMeanSquaredError
 from . import regressor_tools as rt
 from . import experiments_tools as et
 
-
-#Paths
+# Paths
 module = "RegressionExperiment"
 data_path = "data/rrls/catalog/"
 rrl_path = "data/rrls/raw_datasets/raw_dataset_ab/"
 problems = ["rrls"]       
-regressors = ["gru", "fcn", "resnet", "inception", "convlstm", "lstm", "bilstm", "bigru", "convgru"]
-iterations = [13]
+regressors = ["transformer"] # "gru", "fcn", "resnet", "inception", "convlstm", "lstm", "bilstm", "bigru", "convgru"]
+iterations = [14]
 used_ids = "ids.txt"
 results = "train_predictions.png"
 

@@ -266,7 +266,7 @@ def plot_all_lc(phases, sequences, fname=None, indx_highlight=None, figformat="p
         seq = seq[mask]
         ph = ph[mask]
         # plt.plot(phases[ii], sequences[ii], ',', color='grey', alpha=0.5)
-        plt.plot(ph, seq, ',', color='grey', alpha=0.5)
+        plt.plot(ph, seq, ',', color='grey', alpha=0.9)
     if indx_highlight is not None:
         ph = phases[indx_highlight]
         seq = sequences[indx_highlight]
@@ -278,5 +278,5 @@ def plot_all_lc(phases, sequences, fname=None, indx_highlight=None, figformat="p
     plt.ylabel('mag')
     # plt.ylim(-1.1, 0.8)
     plt.gca().invert_yaxis()
-    plt.savefig(fname + "." + figformat, format=figformat)
+    plt.savefig(fname + "." + figformat, format=figformat, dpi=1200)
     plt.close(fig)
