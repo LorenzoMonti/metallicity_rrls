@@ -9,7 +9,7 @@ from tensorflow.keras.regularizers import l1, l2
 name = "RegressorTools"
 
 classical_ml_models = ["xgboost", "svr", "random_forest"]
-deep_learning_models = ["fcn", "resnet", "inception", "convlstm", "lstm", "bilstm", "gru", "bigru", "convgru", "transformer"]
+deep_learning_models = ["fcn", "resnet", "inception", "convlstm", "lstm", "bilstm", "gru", "bigru", "convgru", "transformer", "informer"]
 tsc_models = ["rocket"]
 linear_models = ["lr", "ridge"]
 all_models = classical_ml_models + deep_learning_models + linear_models
@@ -116,6 +116,9 @@ def create_regressor(regressor_name, input_shape, output_directory, verbose=1, i
     if regressor_name == "transformer":
         from models.deep_learning import transformer
         return transformer.TransformerRegressor(output_directory, input_shape, verbose)
+    if regressor_name == "informer":
+        from models.deep_learning import informer
+        return informer.InformerRegressor(output_directory, input_shape, verbose)
 
     # classical ML models
     if regressor_name == "xgboost":
@@ -148,7 +151,7 @@ def create_regressor(regressor_name, input_shape, output_directory, verbose=1, i
         kwargs = {"fit_intercept": True}
         return LinearRegressor(output_directory, kwargs, type=regressor_name)
 
-def setup_callbacks(auto_stop=None, min_delta=10e-5, patience=200,
+def setup_callbacks(auto_stop=None, min_delta=10e-5, patience=400,
                     optimize_lr=False, min_learning_rate=0.0001, n_training_epochs=100, lr_increment_coeff=0.9,
                     is_checkpoint=False, checkpoint_period=100,
                     save_model=False, n_zoom=100, n_update=100, eval_metrics=['accuracy'], figname="liveplot"):

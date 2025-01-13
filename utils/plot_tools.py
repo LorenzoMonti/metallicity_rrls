@@ -280,3 +280,12 @@ def plot_all_lc(phases, sequences, fname=None, indx_highlight=None, figformat="p
     plt.gca().invert_yaxis()
     plt.savefig(fname + "." + figformat, format=figformat, dpi=1200)
     plt.close(fig)
+
+def plot_period_amplitude(period, amplitude, metallicity, figformat='png', fname="./output/" + "_all_lc"):
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sc = ax.scatter(period, amplitude, c=metallicity, cmap='turbo', s=1)
+    ax.set_xlabel('Period')
+    ax.set_ylabel('AmpG')
+    fig.colorbar(sc, label='[Fe/H]')
+    plt.savefig(fname + "." + figformat, format=figformat, dpi=300)
+    plt.close(fig)

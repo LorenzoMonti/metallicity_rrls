@@ -25,6 +25,9 @@ if __name__ == '__main__':
         
         # period, X, magnitudes and phases
         periods_input = input_dataset[period].to_numpy()
+        amplitude_input = input_dataset['peak_to_peak_g'].to_numpy()
+        #plot_period_amplitude(periods_input, amplitude_input, input_dataset[metallicity].to_numpy(), figformat='png', fname="./output/" + "_period_amplitude")
+
         X, mags, phases = read_time_series(ids_dev, data_path, max_rrl_point, periods=periods_input, max_phase=1.0)
         # plot mags and phases
         plot_all_lc(phases['g'], mags['g'], figformat='png', fname="./output/" + "_all_lc")

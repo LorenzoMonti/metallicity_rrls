@@ -11,11 +11,11 @@ from . import experiments_tools as et
 
 # Paths
 module = "RegressionExperiment"
-data_path = "data/rrls/catalog/"
+data_path = "data/rrls/catalog_ab/"
 rrl_path = "data/rrls/raw_datasets/raw_dataset_ab/"
 problems = ["rrls"]       
 regressors = ["transformer"] # "gru", "fcn", "resnet", "inception", "convlstm", "lstm", "bilstm", "bigru", "convgru"]
-iterations = [14]
+iterations = [13]
 used_ids = "ids.txt"
 results = "train_predictions.png"
 
@@ -36,7 +36,7 @@ metallicity_error = "FeH_error"
 # Model parameters
 dl_array = np.array([16, 16, 'l1', 5e-6, 5e-6, 0, 0, 0.1, 0.1])
 hparam_grid = [dl_array, dl_array, dl_array, dl_array, dl_array, dl_array, dl_array, dl_array, dl_array]
-learning_rate=0.01
+learning_rate=0.00023273998841816132
 beta_1=0.9
 beta_2=0.999
 epsilon=1e-07
@@ -50,7 +50,7 @@ batch_size=256
 # callbacks parameters
 auto_stop="early"
 min_delta=1e-5
-patience=1000
+patience=400
 optimize_lr=False, 
 n_training_epochs=50000
 is_checkpoint=False
@@ -64,6 +64,6 @@ compile_kwargs = {'optimizer': optimizer, 'loss': loss, 'metrics': metrics, 'wei
 # Metrics
 metrics_t = {'r2': [], 'wrmse': [], 'wmae': [], 'rmse': [], 'mae': []}
 metrics_v = {'r2': [], 'wrmse': [], 'wmae': [], 'rmse': [], 'mae': []}
-callbacks = rt.setup_callbacks(auto_stop="early", min_delta=1e-5, patience=1000, optimize_lr=False,
-                            n_training_epochs=50000, is_checkpoint=False, save_model=True,
+callbacks = rt.setup_callbacks(auto_stop="early", min_delta=1e-5, patience=100, optimize_lr=False,
+                            n_training_epochs=500, is_checkpoint=False, save_model=True,
                             n_zoom=200, n_update=100,eval_metrics=['root_mean_squared_error'])
