@@ -32,6 +32,9 @@ The following models are implemented in this repository:
 7. GRU
 8. BiGRU
 9. ConvGRU
+10. AttentionGRU
+11. Transformer
+12. Informer
 
 ## Output
 
