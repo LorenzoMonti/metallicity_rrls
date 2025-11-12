@@ -91,7 +91,7 @@ If you use this project for your research, a citation in your manuscript would b
 ```bibtex
 @article{monti2025unified,
   title={Unified Deep Learning Approach for Estimating the Metallicities of RR Lyrae Stars Using Light Curves from Gaia Data Release 3},
-  author={Monti, Lorenzo and Muraveva, Tatiana and Clementini, Gisella and Garofalo, Alessia},
+  author={Monti, Lorenzo and Muraveva, Tatiana and Garofalo, Alessia and Clementini, Gisella and Valentini, Maria Letizia},
   journal={Astronomy \& Astrophysics},
   volume={702},
   number={14},
