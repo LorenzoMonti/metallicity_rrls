@@ -87,3 +87,17 @@ If you use this project for your research, a citation in your manuscript would b
   publisher={MDPI}
 }
 ```
+[**[Unified deep learning approach for estimating the metallicities of RR Lyrae stars using light curves from Gaia Data Release 3]**](https://www.aanda.org/articles/aa/abs/2025/10/aa55681-25/aa55681-25.html)
+```bibtex
+@article{monti2025unified,
+  title={Unified Deep Learning Approach for Estimating the Metallicities of RR Lyrae Stars Using Light Curves from Gaia Data Release 3},
+  author={Monti, Lorenzo and Muraveva, Tatiana and Clementini, Gisella and Garofalo, Alessia},
+  journal={Astronomy \& Astrophysics},
+  volume={702},
+  number={14},
+  pages={A148},
+  year={2025},
+  publisher={EDP Sciences}
+}
+
+```
