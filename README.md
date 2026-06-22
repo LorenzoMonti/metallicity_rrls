@@ -57,8 +57,8 @@ Example. `regressors = ["random_forest", "convgru"]` `dl = [False, True]` e `hpa
 ## Support scripts
 
 In the root folder, you can find some support scripts such as: 
-* `pre-processing.py` is necessary for the pre-processing of the photonometric light curves.
-* `plot_all_lightcurves.py` plot of the photonometric dataset of light curves (phase/magnitude).
+* `pre-processing.py` is necessary for the pre-processing of the photometric light curves.
+* `plot_all_lightcurves.py` plot of the photometric dataset of light curves (phase/magnitude).
 * `evaluation_models.py` uses weights from the towed model to evaluate light curves on an unknown test dataset.
 * `draw_models.py` draws all the implemented models (found in models/ folder).
 
